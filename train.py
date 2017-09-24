@@ -1,7 +1,7 @@
 import pandas as pd
 import cv2
 from keras.models import Sequential
-from keras.layers import Dense, Flatten
+from keras.layers import Dense, Flatten, Lambda
 import numpy as np
 import os
 
@@ -31,9 +31,12 @@ data.columns = ['center', 'left', 'right', 'steering', 'throttle', 'brake', 'spe
 X = np.array(read_images(data))
 y = np.array(read_steering_measurements(data))
 
+input_shape = X[0].shape
+
 print("Training...")
 model = Sequential()
-model.add(Flatten(input_shape = X[0].shape))
+model.add(Lambda(lambda x: x/255.0, input_shape=input_shape))
+model.add(Flatten())
 model.add(Dense(1))
 model.compile(loss='mse', optimizer='adam')
 model.fit(X, y, validation_split=0.2, shuffle=True)
