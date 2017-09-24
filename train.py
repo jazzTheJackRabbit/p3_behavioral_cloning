@@ -49,9 +49,9 @@ model.add(Lambda(lambda x: x/255.0 - 0.5, input_shape=input_shape))
 model.add(Cropping2D(cropping=((70,25), (0,0)), input_shape=(3,160,320)))
 
 # Convolutions
-model.add(Convolution2D(24, (5, 5), subsample=(2,2), activation='relu'))
-model.add(Convolution2D(36, (5, 5), subsample=(2,2), activation='relu'))
-model.add(Convolution2D(48, (5, 5), subsample=(2,2), activation='relu'))
+model.add(Convolution2D(24, (5, 5), strides=(2,2), activation='relu'))
+model.add(Convolution2D(36, (5, 5), strides=(2,2), activation='relu'))
+model.add(Convolution2D(48, (5, 5), strides=(2,2), activation='relu'))
 model.add(Convolution2D(64, (3, 3), activation='relu'))
 model.add(Convolution2D(64, (3, 3), activation='relu'))
 
