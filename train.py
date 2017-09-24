@@ -35,10 +35,10 @@ input_shape = X[0].shape
 
 print("Training...")
 model = Sequential()
-model.add(Lambda(lambda x: x/255.0, input_shape=input_shape))
+model.add(Lambda(lambda x: x/255.0 - 0.5, input_shape=input_shape))
 model.add(Flatten())
 model.add(Dense(1))
 model.compile(loss='mse', optimizer='adam')
-model.fit(X, y, validation_split=0.2, shuffle=True)
+model.fit(X, y, validation_split=0.3, shuffle=True)
 
 model.save('model/model.h5')
