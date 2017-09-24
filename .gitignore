@@ -12,3 +12,5 @@ pip-selfcheck.json
 
 .ipynb_checkpoints
 .Python
+
+*.cfg
