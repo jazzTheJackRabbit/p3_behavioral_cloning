@@ -38,4 +38,4 @@ model.add(Dense(1))
 model.compile(loss='mse', optimizer='adam')
 model.fit(X, y, validation_split=0.2, shuffle=True)
 
-model.save('model.h5')
+model.save('model/model.h5')
