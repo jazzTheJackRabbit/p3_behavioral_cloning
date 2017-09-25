@@ -8,12 +8,12 @@ from keras.layers.pooling import MaxPooling2D
 import cv2
 import numpy as np
 import sklearn
-
+from sklearn.utils import shuffle
 import os
 import csv
 
 samples = []
-with open('./driving_log.csv') as csvfile:
+with open('./data/driving_log.csv') as csvfile:
     reader = csv.reader(csvfile)
     for line in reader:
         samples.append(line)
@@ -31,7 +31,7 @@ def generator(samples, batch_size=32):
             images = []
             angles = []
             for batch_sample in batch_samples:
-                name = './IMG/'+batch_sample[0].split('/')[-1]
+                name = './data/IMG/'+batch_sample[0].split('/')[-1]
                 center_image = cv2.imread(name)
                 center_angle = float(batch_sample[3])
                 images.append(center_image)
@@ -46,15 +46,15 @@ def generator(samples, batch_size=32):
 train_generator = generator(train_samples, batch_size=32)
 validation_generator = generator(validation_samples, batch_size=32)
 
-ch, row, col = 3, 80, 320  # Trimmed image format
-input_shape = (ch, row, col)
+ch, row, col = 3, 160, 320  # Trimmed image format
+input_shape = (row, col, ch)
 
 print("Training...")
 model = Sequential()
 
 # Preprocess
 model.add(Lambda(lambda x: x/127.5 - 1.0, input_shape=input_shape, output_shape=input_shape))
-model.add(Cropping2D(cropping=((70,25), (0,0)), input_shape=input_shape))
+model.add(Cropping2D(cropping=((70,25), (0,0))))
 
 # Convolutions
 model.add(Convolution2D(24, (5, 5), strides=(2,2), activation='relu'))
