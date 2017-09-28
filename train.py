@@ -30,12 +30,20 @@ def generator(samples, batch_size=32):
 
             images = []
             angles = []
+
             for batch_sample in batch_samples:
-                name = './data/IMG/'+batch_sample[0].split('/')[-1]
-                center_image = cv2.imread(name)
-                center_angle = float(batch_sample[3])
-                images.append(center_image)
-                angles.append(center_angle)
+                for view in range(0,3):
+                    for reverse in range(0,2):
+                        name = './data/IMG/'+batch_sample[view].split('/')[-1]
+                        center_image = cv2.imread(name)
+                        center_angle = float(batch_sample[3])
+                        
+                        if reverse:
+                            center_image = np.flip(center_image)
+                            center_angle = -center_angle
+                        
+                        images.append(center_image)
+                        angles.append(center_angle)
 
             # trim image to only see section with road
             X_train = np.array(images)
@@ -79,6 +87,6 @@ model.fit_generator(train_generator,
         #samples_per_epoch= len(train_samples), 
         validation_data=validation_generator,
         validation_steps=len(validation_samples),
-        epochs=5)
+        epochs=3)
 
 model.save('model/model.h5')
