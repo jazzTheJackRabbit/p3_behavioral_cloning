@@ -39,7 +39,7 @@ def generator(samples, batch_size=32):
                         center_angle = float(batch_sample[3])
                         
                         if reverse:
-                            center_image = np.flip(center_image)
+                            center_image = np.fliplr(center_image)
                             center_angle = -center_angle
                         
                         images.append(center_image)
