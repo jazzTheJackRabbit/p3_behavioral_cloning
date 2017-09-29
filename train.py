@@ -36,6 +36,7 @@ def generator(samples, batch_size=32):
                     for reverse in range(0,2):
                         name = './data/IMG/'+batch_sample[view].split('/')[-1]
                         center_image = cv2.imread(name)
+                        center_image = cv2.cvtColor(center_image, cv2.COLOR_BGR2RGB)
                         center_angle = float(batch_sample[3])
                         
                         if reverse:
