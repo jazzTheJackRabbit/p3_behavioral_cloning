@@ -159,6 +159,8 @@ I then recorded the vehicle recovering from the left side and right sides of the
   <p align="center">Recovering from going off-track</p>
 </p>
 
+Some of the challenging parts of the track occur along a small percentage of the track, I gathered more data around these regions by driving the simulator around these regions multiple times in the forward and backward directions - this helped generalize the model for different types of track.
+
 To augment the data sat, I also flipped images and angles thinking that this would ... For example, here is an image that has then been flipped:
 
 <p align="center">
