@@ -1,3 +1,4 @@
+import matplotlib
 from moviepy.editor import ImageSequenceClip
 import argparse
 
