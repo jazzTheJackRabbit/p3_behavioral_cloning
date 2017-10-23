@@ -1,4 +1,4 @@
-## SDC - Project 3
+## SDC - Project 3 ([Video](https://youtu.be/KfqGwHf7-fI))
 ### Report
 
 ---
@@ -13,7 +13,6 @@ The goals / steps of this project are the following:
 
 
 ## [Rubric Points](https://review.udacity.com/#!/rubrics/432/view)
----
 ### Files Submitted & Code Quality
 
 #### 1. Submission includes all required files and can be used to run the simulator in autonomous mode
@@ -38,16 +37,14 @@ The model.py file contains the code for training and saving the convolution neur
 #### 1. An appropriate model architecture has been employed
 
 The part of the source code responsible for the model creation is:
-* `model.py`- Line 79-102
+* `model.py`- Line 75-102
 
 My model consists of the following layers:
 * A lambda layer for data normalization in the model - `line 79`
 * Three convolution layers with `5x5` filter sizes and depths of `24`, `36` and `48` - `Line 86-88`
 * One convolution layer with a filter size of `3x3` and a depth of `64` - `Line 89`
 * One final convolution layer with a filter size of `2x2` and a depth of `128` - `Line 90`
-
-All of the above layers include RELU activations to introduce nonlinearity (lines 86 - 90)
-
+* All of the above layers include RELU activations to introduce nonlinearity (`lines 86 - 90`)
 * A layer to flatten the output of all the convolution layers to a feature vector.
 * 4 fully connected dense layers with one dropout layer to avoid overfitting.
 
@@ -84,13 +81,13 @@ The overall strategy was to build a robust end-to-end network architecture that 
 
 * Next, I tried using the LeNet architecture with 2 sets of convolution and max-pooling layers with 1 fully connected layer. The validation error from this architecture reduced compared to the previous architecture.
 
-  * Visually inspecting the performance showed that the car was in fact driving fairly well for the first 10% of the track but as soon as the characteristics of the track changed to include a water body in the background or different track lines or different textured roads - like bridges, the network architecture performed poorly.
+  * Visually inspecting the performance showed that the car was in fact driving fairly well for the first 10% (albeit, stuttering with the steering angles) of the track but as soon as the characteristics of the track changed to include a water body in the background or different track lines or different textured roads - like bridges, the network architecture performed poorly.
 
 * At this point, I realized that a more robust network would have a more sophisticated feature representation and decided to change the network architecture.
 
   * The end-to-end self driving car architecture from the team at NVIDIA was one of the main inspirations for the design of this neural network architecture. Since the problem statement they consider is very similar to the problem statement of this project, the NVIDIA architecture provided a good starting point to build a robust system for a self-driving car.
 
-  * I implemented a network architecture with 12 layers. The layer configurations are as follows:
+  * I implemented a network architecture with 10 main layers. The layer configurations are as follows:
     * 1 Normalization layer - Performing normalization in the network allows the normalization
 scheme to be altered with the network architecture and to be accelerated via GPU processing.
 
@@ -106,11 +103,11 @@ scheme to be altered with the network architecture and to be accelerated via GPU
 
   * This final architecture worked very well on the first test track.
 
-#TODO: Network architecture diagram
-
 #### 2. Final Model Architecture
 
-The final model architecture (`model.py` lines 79-102) consisted of a convolution neural network with the following layers and layer sizes:
+#TODO: Network architecture diagram
+
+The final model architecture (`model.py` lines 75-102) consists of a convolution neural network with the following layers and layer sizes:
 
 * Preprocessing layers:
   * Layer 1 - Lambda layer for normalization
@@ -137,7 +134,7 @@ The final model architecture (`model.py` lines 79-102) consisted of a convolutio
 
 #### 3. Creation of the Training Set & Training Process
 
-To capture good driving behavior, I first recorded two laps on track one using center lane driving. Here is an example image of center lane driving:
+To capture good driving behavior, I first recorded two laps on track one, using center lane driving. Here is an example image of center lane driving:
 
 <p align="center">
   <img src="./output_images/center.jpg" width="40%"/>
@@ -159,9 +156,9 @@ I then recorded the vehicle recovering from the left side and right sides of the
   <p align="center">Recovering from going off-track</p>
 </p>
 
-Some of the challenging parts of the track occur along a small percentage of the track, I gathered more data around these regions by driving the simulator around these regions multiple times in the forward and backward directions - this helped generalize the model for different types of track.
+Some of the challenging parts of the track occur along a small percentage of the track, I gathered more data around these regions by driving the simulator around these regions multiple times in forward and backward directions - this helped generalize the model for different types of tracks.
 
-To augment the data sat, I also flipped images and angles thinking that this would ... For example, here is an image that has then been flipped:
+To augment the dataset, I also flipped images and angles to further help generalize the dataset. For example, here is an image that has then been flipped:
 
 <p align="center">
   <img src="./output_images/original.jpg" width="40%"/>
@@ -180,3 +177,10 @@ To augment the data sat, I also flipped images and angles thinking that this wou
 * The validation set helped determine if the model was over or under fitting.
 * The ideal number of epochs was 3 as evidenced by the validation error not decreasing with more epochs. In fact in some training cases the validation error would increase with more epochs.
 * I used an ADAM optimizer so that manually training the learning rate wasn't necessary.
+
+### Performance/Result Videos
+
+I created two videos to visualize the performance of the network:
+
+* [3rd person (Car cam) view](https://youtu.be/KfqGwHf7-fI)
+* [1st person (Bumper cam) view](https://youtu.be/NfIez3m8BI8)
