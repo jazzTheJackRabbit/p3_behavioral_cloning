@@ -87,6 +87,11 @@ The overall strategy was to build a robust end-to-end network architecture that 
 
   * The end-to-end self driving car architecture from the team at NVIDIA was one of the main inspirations for the design of this neural network architecture. Since the problem statement they consider is very similar to the problem statement of this project, the NVIDIA architecture provided a good starting point to build a robust system for a self-driving car.
 
+  <p align="center">
+    <img src="./output_images/nvidia.png" width="40%"/>
+    <p align="center">Nvidia Network Architecture</p>
+  </p>
+
   * I implemented a network architecture with 10 main layers. The layer configurations are as follows:
     * 1 Normalization layer - Performing normalization in the network allows the normalization
 scheme to be altered with the network architecture and to be accelerated via GPU processing.
@@ -104,8 +109,6 @@ scheme to be altered with the network architecture and to be accelerated via GPU
   * This final architecture worked very well on the first test track.
 
 #### 2. Final Model Architecture
-
-#TODO: Network architecture diagram
 
 The final model architecture (`model.py` lines 75-102) consists of a convolution neural network with the following layers and layer sizes:
 
